@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "mode": "operate",
+  "world": "executive operations desk",
+  "tokens": {
+    "ink": "#18253b",
+    "navy": "#14243b",
+    "paper": "#f6f5f1",
+    "accent": "#365f9d",
+    "critical": "#b5423d",
+    "warning": "#a56a22",
+    "good": "#337861"
+  }
+}

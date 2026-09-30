@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14243b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <title>Northstar · Risk Intelligence</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>Northstar</strong><small>Risk Intelligence</small></span></div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-page="overview"><span class="nav-icon" data-icon="overview"></span><span>Overview</span></button>
+        <button class="nav-item" data-page="portfolio"><span class="nav-icon" data-icon="portfolio"></span><span>Portfolio</span></button>
+        <button class="nav-item" data-page="briefing"><span class="nav-icon" data-icon="briefing"></span><span>Executive briefing</span></button>
+        <button class="nav-item" data-page="ask"><span class="nav-icon" data-icon="spark"></span><span>Ask intelligence</span></button>
+        <button class="nav-item" data-page="impact"><span class="nav-icon" data-icon="impact"></span><span>Change impact</span></button>
+      </nav>
+      <div class="sidebar-foot"><span class="status-dot"></span> Demo workspace <span class="sidebar-foot-sub">Synthetic portfolio data</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="breadcrumb">Enterprise portfolio <span>/</span> <strong id="current-section">Overview</strong> <em class="demo-badge">Demo data</em></div><div class="top-actions"><span class="today" id="today"></span><button class="button button-primary" id="new-project">+ New initiative</button></div></header>
+      <main id="main-content">
+        <section class="page active" id="page-overview" aria-labelledby="overview-title">
+          <div class="page-heading"><div><h1 id="overview-title">Portfolio overview</h1><p>A clear view of delivery health across every active initiative.</p></div><span class="as-of" id="overview-asof"></span></div>
+          <div id="overview-content" class="loading-state">Loading portfolio…</div>
+          <div id="forecast-content"></div>
+        </section>
+        <section class="page" id="page-portfolio" aria-labelledby="portfolio-title">
+          <div class="page-heading"><div><h1 id="portfolio-title">Initiative portfolio</h1><p>Investigate delivery signals, ownership, milestones, and source evidence.</p></div></div>
+          <div class="toolbar"><label class="search"><span data-icon="search"></span><input id="project-search" type="search" placeholder="Search initiatives, clients, owners" aria-label="Search initiatives"></label><div class="segmented" role="group" aria-label="Filter by risk"><button class="selected" data-filter="all">All</button><button data-filter="critical">Critical</button><button data-filter="at risk">At risk</button><button data-filter="on track">On track</button></div></div>
+          <div id="portfolio-content" class="loading-state">Loading initiatives…</div>
+        </section>
+        <section class="page" id="page-briefing" aria-labelledby="briefing-title">
+          <div class="page-heading"><div><h1 id="briefing-title">Executive briefing</h1><p>A management-ready weekly summary built from live portfolio evidence.</p></div><button class="button button-secondary" id="copy-brief">Copy briefing</button></div>
+          <div id="briefing-content" class="loading-state">Preparing briefing…</div>
+        </section>
+        <section class="page" id="page-ask" aria-labelledby="ask-title">
+          <div class="page-heading"><div><h1 id="ask-title">Ask intelligence</h1><p>Ask a project question and trace the answer back to uploaded evidence.</p></div></div>
+          <div class="two-column ask-layout"><div class="surface question-panel"><h2>What would you like to know?</h2><form id="ask-form"><label for="ask-question">Question</label><textarea id="ask-question" rows="5" required minlength="5" placeholder="Why is Project Phoenix delayed?"></textarea><label for="ask-project">Scope</label><select id="ask-project"><option value="">Entire portfolio</option></select><button class="button button-primary" type="submit">Find answer <span aria-hidden="true">→</span></button></form><div class="prompt-list"><span>Try asking</span><button data-prompt="Why is Project Phoenix delayed?">Why is Project Phoenix delayed?</button><button data-prompt="What was decided about the support platform transition?">What was decided about the support platform transition?</button><button data-prompt="Which Salesforce dependencies need attention?">Which Salesforce dependencies need attention?</button></div></div><div id="ask-result" class="surface answer-panel empty-panel"><span class="empty-symbol" data-icon="spark"></span><h2>Answers with receipts</h2><p>Retrieved reports, notes, and decisions appear here alongside the response.</p></div></div>
+        </section>
+        <section class="page" id="page-impact" aria-labelledby="impact-title">
+          <div class="page-heading"><div><h1 id="impact-title">Change impact</h1><p>See how a proposed change touches teams, systems, workflows, and dependencies.</p></div></div>
+          <div class="two-column impact-layout"><div class="surface question-panel"><h2>Describe the change</h2><p class="form-intro">Use the system or process names your teams already track.</p><form id="impact-form"><label for="impact-announcement">Proposed announcement</label><textarea id="impact-announcement" rows="7" required minlength="10">The company will migrate its customer-support platform from Salesforce to a new platform.</textarea><button class="button button-primary" type="submit">Analyze impact <span aria-hidden="true">→</span></button></form></div><div id="impact-result" class="surface answer-panel empty-panel"><span class="empty-symbol" data-icon="impact"></span><h2>Trace the ripple effect</h2><p>Affected initiatives and evidence-backed matches will appear here.</p></div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="project-drawer" class="project-drawer" role="dialog" aria-modal="true" aria-label="Initiative details" hidden><div id="drawer-content"></div></aside>
+  <div id="modal-backdrop" class="modal-backdrop" hidden></div>
+  <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden><div class="modal-head"><div><h2 id="modal-title">New initiative</h2><p>Add the core information. Signals can be added after creation.</p></div><button class="icon-button" id="close-modal" aria-label="Close">×</button></div><form id="project-form" class="modal-form"><label>Name<input name="name" required minlength="3" placeholder="e.g. Service Modernization"></label><div class="form-grid"><label>Client or business unit<input name="client" required placeholder="e.g. Northstar Retail"></label><label>Project owner<input name="owner" required placeholder="e.g. Maya Iyer"></label></div><label>Description<textarea name="description" rows="2" placeholder="What is this initiative delivering?"></textarea></label><div class="form-grid"><label>Target date<input name="target_date" type="date" required></label><label>Budget<input name="budget" type="number" min="0" step="1" value="0"></label></div><label>Currency code<input name="currency" required minlength="3" maxlength="3" pattern="[A-Z]{3}" value="USD" placeholder="USD"></label><div class="form-grid"><label>Teams <small>comma separated</small><input name="teams" placeholder="Support, Data Engineering"></label><label>Systems <small>comma separated</small><input name="systems" placeholder="Salesforce CRM, ETL"></label></div><label>Workflows <small>comma separated</small><input name="workflows" placeholder="Case routing, Reporting"></label><div class="modal-actions"><button class="button button-secondary" type="button" id="cancel-project">Cancel</button><button class="button button-primary" type="submit">Create initiative</button></div></form></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>
